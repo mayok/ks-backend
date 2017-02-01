@@ -1,0 +1,29 @@
+FROM ubuntu:16.04
+
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.utf8
+ENV LC_ALL en_US.UTF-8
+
+RUN \
+  apt-get update && \
+  apt-get install -y \
+    build-essential \
+    python \
+    postgresql-plpython \
+    python-pip \
+    mecab \
+    libmecab-dev \
+    mecab-ipadic
+
+RUN \
+  apt-get install -y curl && \
+  curl -O https://raw.githubusercontent.com/snaga/summpy/pg_summpy/pg_summpy/pg_summpy.sql
+  # psql -f pg_summpy.sql mydb && \
+  # rm pg_summpy.sql
+
+
+RUN \
+  pip install --upgrade pip && \
+  pip install -y \
+    summpy \
+    mecab-python
