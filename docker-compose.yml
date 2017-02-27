@@ -1,5 +1,8 @@
-version: '1'
+version: '3'
 services:
+  postgres:
+    image: mayok/postgresql
+
   web:
     build:
       context: .
@@ -8,17 +11,10 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
-    depends_on:
+    links:
       - postgres
+    environment:
+      - PGHOST=db
+      - PGUSER=summpy
+      - PGDATABASE=summpy
 
-  postgres:
-    image: mayok/postgresql-summpy
-    command: "psqld"
-    volumes:
-      - "postgres-webapp-data:/var/lib/postgresd"
-    environments:
-      - "POSTGRESQL_PASSWORD=password"
-
-
-volumes:
-  postgres-webapp-data:
