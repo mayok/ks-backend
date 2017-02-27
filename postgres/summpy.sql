@@ -13,7 +13,7 @@ $$ LANGUAGE plpythonu;
 --
 -- lexrank_summarize
 --
-DROP FUNCTION lexrank_summarize(p text, t text, s_limit integer);
+DROP FUNCTION IF EXISTS lexrank_summarize(p text, t text, s_limit integer);
 
 CREATE OR REPLACE FUNCTION lexrank_summarize(p text, t text, s_limit integer)
   RETURNS SETOF text

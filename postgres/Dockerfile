@@ -1,8 +1,5 @@
 FROM postgres:9.6
 
-COPY summpy.sql /tmp
-COPY init-user-db.sh /docker-entrypoint-initdb.d
-
 RUN \
   apt-get update && \
   apt-get install -y \
@@ -16,3 +13,6 @@ RUN \
     python-scipy
 
 RUN pip install summpy janome
+
+COPY init-user-db.sh /docker-entrypoint-initdb.d
+COPY summpy.sql /tmp
