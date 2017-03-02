@@ -3,12 +3,12 @@ services:
   # postgres:
   #   image: mayok/postgresql
   #
-  web:
+  backend:
     build:
       context: ./backend
     volumes:
-      - .:/home/app/web
-      - /home/app/web/node_modules
+      - .:/home/app/backend
+      - /home/app/backend/node_modules
     ports:
       - "3000:3000"
     # links:
@@ -17,4 +17,11 @@ services:
     #   - PGHOST=db
     #   - PGUSER=summpy
     #   - PGDATABASE=summpy
-
+  # fronend:
+  #   build:
+  #     context: ./fronend
+  #   volumes:
+  #     .:/home/app/frontend
+  #     /home/app/frontend/node_modules
+  #   ports:
+  #     - "3000:3000"
