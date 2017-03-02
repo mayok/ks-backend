@@ -5,7 +5,7 @@ services:
   #
   web:
     build:
-      context: .
+      context: ./backend
     volumes:
       - .:/home/app/web
       - /home/app/web/node_modules
