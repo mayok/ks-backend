@@ -1,6 +1,7 @@
 const pgp = require('pg-promise')();
 
-const connectionString = 'postgres://localhost:5432/summpy';
+const connectionString =
+  `postgres://${process.env.PGUSER}@${process.env.PGHOST}:5432`;
 const db = pgp(connectionString);
 
 export const getTitles = (req, res, next) => {
