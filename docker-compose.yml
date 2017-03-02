@@ -1,7 +1,7 @@
 version: '3'
 services:
   # postgres:
-  #   image: mayok/postgresql
+  #   image: mayok/postgres
   #
   backend:
     build:
@@ -14,7 +14,7 @@ services:
     # links:
     #   - postgres
     # environment:
-    #   - PGHOST=db
+    #   - PGHOST=postgres
     #   - PGUSER=summpy
     #   - PGDATABASE=summpy
   # fronend:
