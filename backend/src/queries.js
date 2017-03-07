@@ -5,7 +5,14 @@ const connectionString =
 const db = pgp(connectionString);
 
 export const getTitles = (req, res, next) => {
-  db.any('select * from summpy')
+  db.none('insert into record(title, content) values($1, $2)', ['title', 'content'])
+    .then(() => {
+      console.log("insert: success");
+    })
+    .catch(() => {
+      console.log("insert: error");
+    });
+  db.any('select * from record')
     .then((data) => {
       res.status(200)
         .json({
