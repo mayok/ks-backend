@@ -1,8 +1,12 @@
 version: '3'
 services:
-  # postgres:
-  #   image: mayok/postgres
-  #
+  postgres:
+    image: mayok/postgres
+    # build:
+    #   context: ./postgres
+    # environment:
+    #   - POSTGRES_PASSWORD=password
+
   backend:
     build:
       context: ./backend
@@ -11,12 +15,14 @@ services:
       - /home/app/backend/node_modules
     ports:
       - "3000:3000"
-    # links:
-    #   - postgres
-    # environment:
-    #   - PGHOST=postgres
-    #   - PGUSER=summpy
-    #   - PGDATABASE=summpy
+    links:
+      - postgres
+    environment:
+      - PGHOST=postgres
+      - PGUSER=summpy
+      - PGPASSWORD=password
+      - PGDATABASE=summpy
+
   # fronend:
   #   build:
   #     context: ./fronend

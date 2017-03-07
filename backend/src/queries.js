@@ -1,7 +1,7 @@
 const pgp = require('pg-promise')();
 
 const connectionString =
-  `postgres://${process.env.PGUSER}@${process.env.PGHOST}:5432`;
+  `postgres://${process.env.PGUSER}:${process.env.PGPASSWORD}@${process.env.PGHOST}:5432/${process.env.PGDATABASE}`;
 const db = pgp(connectionString);
 
 export const getTitles = (req, res, next) => {
