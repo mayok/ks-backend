@@ -1,4 +1,4 @@
-# ks-backend
+# Meeting Record Summarizer
 
 
 ## Docker Hub
