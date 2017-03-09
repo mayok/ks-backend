@@ -1,18 +1,3 @@
 FROM postgres:9.6
 
-RUN \
-  apt-get update && \
-  apt-get install -y \
-    postgresql-plpython-9.6 \
-    python-pip \
-    python-dev
-
-RUN \
-  apt-get install -y \
-    python-numpy \
-    python-scipy
-
-RUN pip install summpy janome
-
 COPY init-user-db.sh /docker-entrypoint-initdb.d
-COPY summpy.sql /tmp
