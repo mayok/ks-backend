@@ -45,3 +45,8 @@ RUN pip install summpy janome
 
 # Cleanup
 RUN apk del build-deps && rm -r /root/.cache /src
+
+EXPOSE 8080
+
+ENTRYPOINT ["python2", "-m summpy.server"]
+CMD ["-h", "127.0.0.1", "-p", "8080"]
