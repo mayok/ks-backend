@@ -1,3 +1,5 @@
+import http from 'http';
+
 const pgp = require('pg-promise')();
 
 const connectionString =
@@ -10,7 +12,7 @@ export const getTitles = (req, res, next) => {
       res.status(200)
          .json({
            status: 'success',
-           data
+           data,
          });
     })
     .catch(err => next(err));
@@ -35,25 +37,65 @@ export const getContent = (req, res, next) => {
           data,
         });
     })
-    .catch(err => {
-      //next(err);
+    .catch((err) => {
+      // next(err);
 
       // 以下、fetch, parse 等は catch の中に書くことじゃないと思う。
       // 解決策が今は思いつかないため、残しておく
 
-      // fetch text from API
+      // 2. fetch text from API
       //   HTTP GET
+      const URL = 'example.com';
+      http.get(URL, (response) => {
+        let body = '';
+        response.setEncoding('utf8');
 
-      // parse xml to json
+        response.on('data', (chunk) => {
+          body += chunk;
+        });
 
-      // HTTP POST
-      //   return summarized data
+        response.on('end', (r) => {
+          // 3. parse xml to json
+          // json = XML.parse(body);
+          // console.log(json);
+        });
+      }).on('error', e => console.log(e.message));
+
+      // 4. summarize
+      //    HTTP POST
+      //      return summarized data
+      const postData = {
+        text: 'text',
+        sent_limit: '3',
+      };
+      const options = {
+        host: URL,
+        port: 80,
+        path: '/',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Content-Length': postData.length,
+        },
+      };
+      const request = http.requestuest(options, (response) => {
+        response.setEncoding('utf8');
+        response.on('data', (chunk) => {
+          console.log(chunk);
+          // res.status(200)
+          //    .json({
+          //      status: 'success',
+          //      chunk,
+          //    });
+        });
+      });
+      request.on('error', e => console.log(e.message));
+      // request.write(json)
+      request.end();
 
       // db.none('insert into record(title, content) values($1, $2)',
       //         ['title', 'content'])
       //   .then()
       //   .catch(err => next(err));
-
     });
-
 };
