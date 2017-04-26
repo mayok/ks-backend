@@ -1,4 +1,5 @@
 import http from 'http';
+import parse from './parser';
 
 const pgp = require('pg-promise')();
 
@@ -20,11 +21,6 @@ const fetchTextFrom = url => new Promise((resolve, reject) => {
     res.on('end', () => resolve(body.join('')));
   });
   req.on('error', err => reject(err));
-});
-
-const parse = xml => new Promise((resolve, reject) => {
-    // parse xml to json or plain text
-    // resolve(text);
 });
 
 const summarize = (text, options) => new Promise((resolve, reject) => {

@@ -5,6 +5,7 @@
   "scripts": {
     "build": "babel src -s -D -d dist --presets es2015",
     "start": "node dist/server.js",
+    "test": "mocha --compilers js:babel-core/register",
     "lint": "eslint --fix --ext .js src/ || true"
   },
   "dependencies": {
