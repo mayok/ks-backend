@@ -12,7 +12,8 @@
     "es6-promise": "^4.1.0",
     "express": "^4.15.2",
     "isomorphic-fetch": "^2.2.1",
-    "pg-promise": "^5.6.7"
+    "pg-promise": "^5.6.7",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
