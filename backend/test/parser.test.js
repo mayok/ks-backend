@@ -16,8 +16,8 @@ describe('xml', () => {
               <recordData>
                 <meetingRecord>
                   <session>186</session>
-                  <nameOfHouse>nameOfHouse</nameOfHouse>
-                  <nameOfMeeting>nameOfMeeting</nameOfMeeting>
+                  <nameOfHouse>name of house</nameOfHouse>
+                  <nameOfMeeting>name of meeting</nameOfMeeting>
                   <issue>1号</issue>
                   <date>2014-06-11</date>
                   <speechRecord>
@@ -34,7 +34,7 @@ describe('xml', () => {
               </recordData>
             </record>
           </records>
-        </data>`).then(data => console.log(data.data.records[0].record[0].recordData[0].meetingRecord[0].speechRecord))
+        </data>`).then(data => console.log(data))
                  .catch(err => console.log(err));
     });
   });
