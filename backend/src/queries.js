@@ -11,9 +11,7 @@ const db = pgp(connectionString);
 const fetchTextFrom = url => new Promise((resolve, reject) => {
   const req = http.get(url, (res) => {
     if (res.statusCode < 200 || res.statusCode > 299) {
-      reject(new Error(
-        `Failed to load page, status code: ${res.statusCode}`,
-      ));
+      reject(new Error(`Failed to load page, status code: ${res.statusCode}`));
     }
 
     const body = [];
@@ -52,10 +50,10 @@ export const getTitles = (req, res, next) => {
   db.any('select title from record')
     .then((data) => {
       res.status(200)
-         .json({
-           status: 'success',
-           data,
-         });
+        .json({
+          status: 'success',
+          data,
+        });
     })
     .catch(err => next(err));
 };
@@ -81,17 +79,16 @@ export const getContent = (req, res, next) => {
             sent_limit: 3,
           }))
           .then(json => res.status(200)
-                           .json({
-                             status: 'success',
-                             json,
-                           }),
+            .json({
+              status: 'success',
+              json,
+            }))
+          .then(db.none(
+            'insert into record(title, content) values($1, $2)',
+            ['title', 'content'],
           )
-          .then(
-            db.none('insert into record(title, content) values($1, $2)',
-                    ['title', 'content'])
-              .then()
-              .catch(err => next(err)),
-          )
+            .then()
+            .catch(err => next(err)))
           .catch(err => console.log(err));
       }
     })

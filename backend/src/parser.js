@@ -15,7 +15,7 @@ const parser = xml => new Promise((resolve, reject) => {
 
     // TODO 本来は numberOfReturn の数を考慮しないといけない
     // numberOfReturn.times do |i|
-      // records =  data.records[i]
+    // records =  data.records[i]
 
     const meetingRecord = data.records[0].record[0].recordData[0].meetingRecord[0];
     const nameOfHouse = meetingRecord.nameOfHouse[0];
